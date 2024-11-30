@@ -10,6 +10,10 @@ public class Mescolatrice implements Runnable
 
     public void run()
     {
-        
+        System.out.println("Mescolatrice " + id + " avviata");
+        for(int i = 0; i < capienza; i+=20)
+        {
+            System.out.println("Mattoni prodotti: " + i);
+        }
     }
 }

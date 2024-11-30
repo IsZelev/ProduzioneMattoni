@@ -14,11 +14,11 @@ public class Produzione implements Runnable
     @Override
     public void run()
     {
-        //genera tutte le mescolatrici
+        //genera tutte le mescolatrici e le avvia
         for(int  i = 0; i < mescolatriciTot; i++)
         {
             Mescolatrice mescolatrice = new Mescolatrice(i);
             mescolatrice.run();
-        }//zona critica e metodi synchronized
+        }
     }
 }
