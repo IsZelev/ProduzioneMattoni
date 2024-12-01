@@ -5,6 +5,7 @@ public class Produzione implements Runnable
     private int mescolatriciTot = 8;
     private int numMattoni = 1600;
     private ArrayList<String> lotti;
+    private ArrayList<Mescolatrice> mescolatrici;
 
     public Produzione(String l)
     {
@@ -20,5 +21,18 @@ public class Produzione implements Runnable
             Mescolatrice mescolatrice = new Mescolatrice(i);
             mescolatrice.run();
         }
+
+        int maltaProdotta = 0;
+
+        for (Mescolatrice m : mescolatrici)
+        {
+            maltaProdotta += m.getMalta();
+        }
+
+        RulloStampante rullo = new RulloStampante(maltaProdotta);
+        Forno forno = new Forno(rullo.stampa());
+
+
+        
     }
 }
