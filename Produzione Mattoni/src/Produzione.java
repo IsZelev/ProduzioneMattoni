@@ -9,16 +9,20 @@ public class Produzione implements Runnable
 
     public Produzione(String l)
     {
+        lotti = new ArrayList<String>();
+        mescolatrici = new ArrayList<Mescolatrice>();
         lotti.add(l);
     }
     
     @Override
     public void run()
     {
+        System.out.println("Avvio produzione...");
         //genera tutte le mescolatrici e le avvia
         for(int  i = 0; i < mescolatriciTot; i++)
         {
             Mescolatrice mescolatrice = new Mescolatrice(i);
+            mescolatrici.add(mescolatrice);
             mescolatrice.run();
         }
 
@@ -30,7 +34,8 @@ public class Produzione implements Runnable
         }
 
         RulloStampante rullo = new RulloStampante(maltaProdotta);
-        Forno forno = new Forno(rullo.stampa());
+        Forno forno = new Forno(lotti);
+        Imballatore imballatore = new Imballatore(forno.getMatt());
 
 
         

@@ -11,4 +11,9 @@ public class Mattone
         lotto = l;
     }
 
+    public String getLotto()
+    {
+        return lotto;
+    }
+
 }

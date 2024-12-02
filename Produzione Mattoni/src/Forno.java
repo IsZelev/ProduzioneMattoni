@@ -1,25 +1,63 @@
-public class Forno implements Runnable
+import java.util.ArrayList;
+
+public class Forno
 {
+
     private int matCrudi;
     private int numMat = 400;
-    private int matProdotti;
+    private ArrayList<Mattone> matProdotti;
     private boolean inCottura;
+    private ArrayList<String> lotti;
 
-    public Forno(int mc)
+    public Forno(ArrayList<String> l)
     {
-        matCrudi = mc;
+        lotti = l;
         inCottura = false;
+    }
+
+    public ArrayList<Mattone> getMatt()
+    {
+        return matProdotti;
     }
     
     //thread con 400 mattoni
 
-    public void run()
+    public synchronized String inforna(int mc) throws InterruptedException
     {
-        if(inCottura == false)
+        matCrudi += mc;
+        String msg = "Il forno ha infornato "+numMat+" mattoni";
+        while(inCottura)
         {
-            matCrudi-=numMat;
-            matProdotti += numMat;
+            wait();
         }
 
+        if(matCrudi == numMat)
+        {
+            System.out.println(msg);
+            return msg+"\n"+cuoci();
+        }else
+        {
+            return "il forno è occupato";
+        }
+
+    }
+    public synchronized String cuoci()
+    {
+        inCottura = true;
+        matCrudi-=numMat;
+        String msg = "Il forno sta cuocendo "+numMat+" mattoni";
+        System.out.println(msg);
+
+        long id = (long) Math.random()*1000;
+        for (int i = 0; i < numMat; i++)
+        {
+            id+=i;
+            int lotto = lotti.size();
+            Mattone m = new Mattone(id, 500, lotti.get(lotto));
+            matProdotti.add(m);
+        }
+        inCottura = false;
+        notifyAll();
+        return msg;
     }
 }
