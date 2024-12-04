@@ -10,7 +10,8 @@ public class Main
             {
                 String lotto = "L" + Math.random()*1000;
                 Produzione produzione = new Produzione(lotto);
-                produzione.run();
+                Thread prodThread = new Thread(produzione);
+                prodThread.start();
             }
 
         }

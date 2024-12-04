@@ -11,7 +11,7 @@ public class Imballatore
     public String imballa()
     {
         int tot = mattoni.size();
-        String msg = "L'imballatore ha imballato "+tot+" mattoni del lotto: "+mattoni.getLast().getLotto();
+        String msg = "L'imballatore ha imballato "+tot+" mattoni del lotto: "+mattoni.get(mattoni.size()).getLotto();
         return msg;
     }
 

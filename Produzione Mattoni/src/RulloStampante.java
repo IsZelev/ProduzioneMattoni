@@ -11,7 +11,7 @@ public class RulloStampante
         idRullo = (int) Math.random();
     }
 
-    public int stampa() throws InterruptedException
+    public int stampa(Forno forno) throws InterruptedException
     {
         while(mattoniStampati < mattoni)
         {

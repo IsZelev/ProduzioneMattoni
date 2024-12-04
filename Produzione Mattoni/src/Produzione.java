@@ -36,7 +36,11 @@ public class Produzione implements Runnable
         RulloStampante rullo = new RulloStampante(maltaProdotta);
         Forno forno = new Forno(lotti);
         Imballatore imballatore = new Imballatore(forno.getMatt());
-
+        try {
+            rullo.stampa(forno);
+        } catch (InterruptedException e)
+        {
+        }
 
         
     }
